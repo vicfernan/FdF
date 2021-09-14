@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:21:32 by vifernan          #+#    #+#             */
-/*   Updated: 2021/09/10 18:16:59 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/09/14 18:00:04 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,12 +133,23 @@ void    ft_bresenham(float x, float y, float x1, float y1, t_vari select)
         y += y_step;
     }
 }
-
 /*
-int     ft_set_color(t_vari select, int x, int y)
+int ft_space_size(t_vari *select)
 {
-    if (select.map[x][y] <= select.max_z / 6)
+    float x;
+    float y;
 
+    x = select->x_size;
+    y = select->y_size;
+
+    ft_isometric(&x, &y, select->max_z);
+
+    printf("X: %f  |  Y: %f\n", x*50, y*50);
+    if (x > y)
+        select->space = 250 / x;
+    else
+        select->space = 850 / y;
+    return(select->space);
 }*/
 
 void    ft_drw_map(t_vari select)
