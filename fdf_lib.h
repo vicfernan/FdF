@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 19:51:11 by vifernan          #+#    #+#             */
-/*   Updated: 2021/09/10 18:03:42 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/09/20 18:56:14 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,23 @@ typedef struct t_variables{
     int max_z;
     int y_size;
     int space;
+    float x;
+    float y;
+    float x_step;
+    float y_step;
+    int z;
+    int z1;
+    int max;
+    int x_start;
+    int y_start;
+    float iso;
 }	t_vari;
+typedef struct t_isometric{
+    float c1;
+    float c2;
+    float hipo;
+    float dis;
+}	t_iso;
 
 int		get_next_line(const int fd, char **line);
 int **ft_map_int(char **a_map, t_vari *select);
@@ -44,7 +60,7 @@ char    **ft_read_save(char *argv, char **a_map);
 int ft_size_y(char *argv);
 t_vari    ft_read_line(char *argv);
 int	hooked_function(void *select);
-int	key_hook(int keycode, void *select);
+int	key_hook(int keycode, t_vari *select);
 void    ft_drw_map(t_vari select);
 
 #endif
