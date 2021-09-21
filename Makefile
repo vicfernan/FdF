@@ -6,7 +6,7 @@
 #    By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/06 19:47:29 by vifernan          #+#    #+#              #
-#    Updated: 2021/09/20 19:53:07 by vifernan         ###   ########.fr        #
+#    Updated: 2021/09/21 17:15:58 by vifernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,6 @@ re: fclean all
 
 test: all
 	@echo "$(BCyan)[RESULTS]$(NO_COLOR)"
-	@./fdf test_maps_3/42.fdf
+	@./fdf test_maps_3/pyramide.fdf
 
 .PHONY: all clean fclean re bonus test

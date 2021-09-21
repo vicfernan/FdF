@@ -6,24 +6,91 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 16:51:03 by vifernan          #+#    #+#             */
-/*   Updated: 2021/09/20 17:01:06 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/09/21 17:28:16 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_lib.h"
 
-int **ft_map_int(char **a_map, t_vari *select)
+int ft_convert_hexa(char a, char b)
 {
-	int		**map;
+    int result;
+    char *hexa;
+    int i;
+    int x;
+    int r;
+
+    a = ft_tolower(a);
+    b = ft_tolower(b);
+    hexa = "0123456789abcdef";
+    x = 0;
+    i = 0;
+    r = 0;
+    while(hexa[r++] != '\0')
+    {
+        if (hexa[r] == a)
+            i = r;
+        if (hexa[r] == b)
+            x = r;
+    }
+    result = (i * 16) + (x * 1);
+    return (result); 
+}
+
+int ft_set_color(char *str)
+{
+    int r;
+    int g;
+    int b;
+
+    r = 0;
+    g = 0;
+    b = 0;
+    if ((str[2] >= 0 && str[2] <= 9) || (ft_tolower(str[2]) >= 'a' && ft_tolower(str[2]) <= 'f'))
+        r = ft_convert_hexa(str[2], str[3]);
+    if ((str[4] >= 0 && str[4] <= 9) || (ft_tolower(str[4]) >= 'a' && ft_tolower(str[4]) <= 'f'))
+        g = ft_convert_hexa(str[2], str[3]);
+    if ((str[6] >= 0 && str[6] <= 9) || (ft_tolower(str[6]) >= 'a' && ft_tolower(str[6]) <= 'f'))
+        b = ft_convert_hexa(str[2], str[3]);
+    return (0 << 24 | r << 16 | g << 8 | b);
+}
+
+int ft_color_z(char *aux)
+{
+    char *cool;
+    int color;
+    int i;
+
+    i = 0;
+    while (aux[i] != '\0')
+    {
+        if (aux[i] == ',')
+            break;
+        i++;
+    }
+    cool = ft_substr(aux, i + 1, ft_strlen(aux) - i);
+    color = ft_set_color(cool);
+    free(cool);
+    return (color);
+}
+
+void ft_map_int(char **a_map, t_vari *select)
+{
+	//int		**map;
     char	**aux;
     int     x;
     int     y;
 
-    map = malloc(select->y_size * sizeof(int *));
+    select->map = malloc(select->y_size * sizeof(int *));
+    select->color_z = malloc(select->y_size * sizeof(int *));
     y = 0;
     select->max_z = 0;
     while (y <= select->y_size)
-        map[y++] = malloc(select->x_size * sizeof(int));
+    {
+        select->map[y] = malloc(select->x_size * sizeof(int));
+        select->color_z[y] = malloc(select->x_size * sizeof(int));
+        y++;
+    }
     y = 0;
     while (y < select->y_size)
     {
@@ -31,15 +98,19 @@ int **ft_map_int(char **a_map, t_vari *select)
         x = 0;
         while (x < select->x_size)
         {
-            map[y][x] = ft_atoi(aux[x]);
-            if (map[y][x] > select->max_z)
-                select->max_z = map[y][x];
+            if (ft_strchr(aux[x], ','))
+                select->color_z[y][x] = ft_color_z(aux[x]);
+            else
+                select->color_z[y][x] = 000;
+            select->map[y][x] = ft_atoi(aux[x]);
+            if (select->map[y][x] > select->max_z)
+                select->max_z = select->map[y][x];
             x++;
         }
         free(aux);
         y++;
     }
-    return (map);
+    //return (map);
 }
 
 int     ft_size_x(char **a_map)
@@ -120,7 +191,7 @@ t_vari    ft_read_line(char *argv)
     a_map = ft_calloc(select.y_size + 2, sizeof(char *));
     a_map = ft_read_save(argv, a_map);
     select.x_size = ft_size_x(a_map);
-    select.map = ft_map_int(a_map, &select);
+    ft_map_int(a_map, &select);
     return (select);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 19:51:11 by vifernan          #+#    #+#             */
-/*   Updated: 2021/09/20 18:56:14 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/09/21 17:48:02 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct t_variables{
     char *mlx;
     char *win;
 	int **map;
+    float **color_z;
     int scale_x;
     int scale_y;
     int x_size;
@@ -45,6 +46,7 @@ typedef struct t_variables{
     int x_start;
     int y_start;
     float iso;
+    float st;
 }	t_vari;
 typedef struct t_isometric{
     float c1;
@@ -54,7 +56,7 @@ typedef struct t_isometric{
 }	t_iso;
 
 int		get_next_line(const int fd, char **line);
-int **ft_map_int(char **a_map, t_vari *select);
+void ft_map_int(char **a_map, t_vari *select);
 int     ft_size_x(char **a_map);
 char    **ft_read_save(char *argv, char **a_map);
 int ft_size_y(char *argv);

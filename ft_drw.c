@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:21:32 by vifernan          #+#    #+#             */
-/*   Updated: 2021/09/20 20:00:22 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/09/21 17:50:51 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void    ft_isometric(float *x, float *y, int z, t_vari *select)
 {
-    *x = (*x - *y) * cos(select->iso);
+    *x = (*x - *y) * cos(select->iso) * select->st;
     *y = (*x + *y) * sin(select->iso) - z;
 }
 
@@ -51,6 +51,24 @@ int	key_hook(int keycode, t_vari *select)
             ft_drw_map(*select);
         }
     }
+
+    if (keycode == 0)
+    {
+            select->st += 0.2;
+            mlx_clear_window(select->mlx, select->win);
+            ft_ajust(select);
+            ft_drw_map(*select);
+    }
+
+    if (keycode == 2)
+    {
+            select->st -= 0.2;
+            mlx_clear_window(select->mlx, select->win);
+            ft_ajust(select);
+            ft_drw_map(*select);
+    }
+
+
     if (keycode == 126)
     {
         if (select->iso < 1)
@@ -75,6 +93,25 @@ int	key_hook(int keycode, t_vari *select)
             select->space -= 10;
             mlx_clear_window(select->mlx, select->win);
             ft_ajust(select);
+            ft_drw_map(*select);
+        }
+    }
+    if (keycode == 124)
+    {
+        if (select->space > 0)
+        {
+
+            select->x_start += 10;
+            mlx_clear_window(select->mlx, select->win);
+            ft_drw_map(*select);
+        }
+    }
+    if (keycode == 123)
+    {
+        if (select->space > 0)
+        {
+            select->x_start -= 10;
+            mlx_clear_window(select->mlx, select->win);
             ft_drw_map(*select);
         }
     }
@@ -104,6 +141,7 @@ int ft_slcolor(t_iso isome, t_vari select, float x1, float y1)
 {
     if (select.z > select.z1)
     {
+        //printf("%f\n", select.color_z[select.y][select.x]);
         isome.c1 = select.x - x1;
         isome.c2 = select.y - y1;
         isome.dis = isome.c1*isome.c1 + isome.c2*isome.c2;
@@ -136,6 +174,13 @@ void ft_selval(t_vari *select, float *x1, float *y1)
     select->y *= select->space;
     *x1 *= select->space;
     *y1 *= select->space;
+    /*if (select->color_z[(int)select->y][(int)select->x] != 0)
+        select->color = select->color_z[(int)select->y][(int)select->x];
+    else if (select->color_z[(int)y1][(int)x1] != 0)
+        select->color = select->color_z[(int)y1][(int)x1];
+    else
+        select->color = 0xffffff;*/
+
 
     ft_isometric(&select->x, &select->y, select->z, select);
     ft_isometric(x1, y1, select->z1, select);
@@ -233,6 +278,7 @@ void    ft_drw_map(t_vari select)
 void    ft_init_map(t_vari select)
 {
     select.iso = 1;
+    select.st = 1;
     select.mlx = mlx_init();
     select.win = mlx_new_window(select.mlx, WIN_X, WIN_Y, "-FDF Project-");
     mlx_hook(select.win, 17, 0, hooked_function, &select);
