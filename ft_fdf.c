@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 16:51:03 by vifernan          #+#    #+#             */
-/*   Updated: 2021/09/21 17:28:16 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/09/24 18:50:08 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,11 @@ void ft_map_int(char **a_map, t_vari *select)
                 select->color_z[y][x] = ft_color_z(aux[x]);
             else
                 select->color_z[y][x] = 000;
+            if (aux[x] == '\0')
+            {
+                printf("Wrong file!");
+                exit(0);
+            }
             select->map[y][x] = ft_atoi(aux[x]);
             if (select->map[y][x] > select->max_z)
                 select->max_z = select->map[y][x];

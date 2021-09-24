@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 19:51:11 by vifernan          #+#    #+#             */
-/*   Updated: 2021/09/21 17:48:02 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/09/24 18:54:19 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,16 @@
 #define WIN_X 1920
 #define WIN_Y 1080
 
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
+
 typedef struct t_variables{
+    t_data img;
     char *mlx;
     char *win;
 	int **map;
@@ -42,12 +51,16 @@ typedef struct t_variables{
     float y_step;
     int z;
     int z1;
-    int max;
+    float max;
     int x_start;
     int y_start;
     float iso;
     float st;
+    int flag;
+    char *fn;
+    int multi_z;
 }	t_vari;
+
 typedef struct t_isometric{
     float c1;
     float c2;
@@ -62,7 +75,7 @@ char    **ft_read_save(char *argv, char **a_map);
 int ft_size_y(char *argv);
 t_vari    ft_read_line(char *argv);
 int	hooked_function(void *select);
-int	key_hook(int keycode, t_vari *select);
+//int	key_hook(int keycode, t_vari *select);
 void    ft_drw_map(t_vari select);
 
 #endif
