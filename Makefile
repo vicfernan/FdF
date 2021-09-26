@@ -6,13 +6,13 @@
 #    By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/06 19:47:29 by vifernan          #+#    #+#              #
-#    Updated: 2021/09/24 19:13:58 by vifernan         ###   ########.fr        #
+#    Updated: 2021/09/26 16:09:09 by vifernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= fdf
 
-CFLAGS	= -Wall 
+CFLAGS	= -Wall -Wextra -Werror
 LINK	= -lmlx -framework OpenGL -framework AppKit
 SRCS	= 	ft_drw.c \
 			ft_fdf.c \

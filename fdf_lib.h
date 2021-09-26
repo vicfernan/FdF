@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 19:51:11 by vifernan          #+#    #+#             */
-/*   Updated: 2021/09/24 18:54:19 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/09/26 16:05:46 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,16 @@ typedef struct	s_data {
 	int		line_length;
 	int		endian;
 }				t_data;
-
+/*
+typedef struct s_images{
+    void *space;
+}               t_images;
+*/
 typedef struct t_variables{
+    /*int w_img;
+    int h_img;*/
     t_data img;
+    //t_images images;
     char *mlx;
     char *win;
 	int **map;
@@ -59,6 +66,7 @@ typedef struct t_variables{
     int flag;
     char *fn;
     int multi_z;
+    int help;
 }	t_vari;
 
 typedef struct t_isometric{
@@ -74,7 +82,7 @@ int     ft_size_x(char **a_map);
 char    **ft_read_save(char *argv, char **a_map);
 int ft_size_y(char *argv);
 t_vari    ft_read_line(char *argv);
-int	hooked_function(void *select);
+int	hooked_function(t_vari *select);
 //int	key_hook(int keycode, t_vari *select);
 void    ft_drw_map(t_vari select);
 

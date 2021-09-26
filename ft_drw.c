@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:21:32 by vifernan          #+#    #+#             */
-/*   Updated: 2021/09/24 19:17:01 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/09/26 16:08:29 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ void ft_ajust(t_vari *select)
     select->y_start = (WIN_Y - screen_y) / 2;
 }
 
-int	hooked_function(void *select)
+int	hooked_function(t_vari *select)
 {
+    select->help = 0;
     exit(0);
 }
 
@@ -62,6 +63,35 @@ void ft_clear_win(t_vari *select)
     }
 }
 
+void ft_help_win(t_vari *select)
+{
+    int x;
+    int y;
+
+    y = 200;
+    while(y < 880)
+    {
+        x = 400;
+        while(x < 1520)
+        {
+            my_mlx_pixel_put(&select->img, x, y, 0x0000ff);
+            x++;
+        }
+        y++;
+    }
+    mlx_put_image_to_window(select->mlx, select->win, select->img.img, 0, 0);
+    mlx_string_put(select->mlx, select->win, 500, 300, 0xffffff, "HELP\\.");
+    mlx_string_put(select->mlx, select->win, 780, 470, 0xffffff, "Click on <esc> to exit");
+    mlx_string_put(select->mlx, select->win, 780, 450, 0xffffff, "Click on <a> to move left");
+    mlx_string_put(select->mlx, select->win, 780, 490, 0xffffff, "Click on <d> to move right");
+    mlx_string_put(select->mlx, select->win, 780, 510, 0xffffff, "Click on <s> to move down");
+    mlx_string_put(select->mlx, select->win, 780, 530, 0xffffff, "Click on <w> to move up");
+    mlx_string_put(select->mlx, select->win, 780, 550, 0xffffff, "Click on <z> to increase z value");
+    mlx_string_put(select->mlx, select->win, 780, 570, 0xffffff, "Click on <x> to decrease z value");
+    mlx_string_put(select->mlx, select->win, 780, 590, 0xffffff, "Click on <up> to change perspective");
+    mlx_string_put(select->mlx, select->win, 780, 610, 0xffffff, "Click on <down> to change perspective");
+}
+
 int	key_hook(int keycode, t_vari *select)
 {
     if (keycode == 53)
@@ -71,6 +101,24 @@ int	key_hook(int keycode, t_vari *select)
         if (select->iso > 0)
         {
             select->iso -= 0.1;
+            mlx_clear_window(select->mlx, select->win);
+            ft_clear_win(select);
+            ft_ajust(select);
+            ft_drw_map(*select);
+        }
+    }
+    if (keycode == 49)
+    {
+        if (select->help == 0)
+        {
+            select->help++;
+            mlx_clear_window(select->mlx, select->win);
+            ft_clear_win(select);
+            ft_help_win(select);
+        }
+        else
+        {
+            select->help = 0;
             mlx_clear_window(select->mlx, select->win);
             ft_clear_win(select);
             ft_ajust(select);
@@ -186,7 +234,7 @@ float   ft_mod(float x)
     return (x);
 }
 
-float Remap(t_iso isome, float newFrom, float newTo)
+float ft_remap(t_iso isome, float newFrom, float newTo)
 {
 	return (isome.dis - 0) / (isome.hipo - 0) * (newTo - newFrom) + (newFrom);
 }
@@ -199,14 +247,14 @@ int ft_slcolor(t_iso isome, t_vari select, float x1, float y1)
         isome.c1 = select.x - x1;
         isome.c2 = select.y - y1;
         isome.dis = isome.c1*isome.c1 + isome.c2*isome.c2;
-        select.color = Remap(isome, 0xffffff, 0xff4000);
+        select.color = ft_remap(isome, 0xffffff, 0xff4000);
     }
     else if (select.z1 > select.z)
     {
         isome.c1 = select.x - x1;
         isome.c2 = select.y - y1;
         isome.dis = isome.c1*isome.c1 + isome.c2*isome.c2;
-        select.color = Remap(isome, 0xff4000, 0xffffff); 
+        select.color = ft_remap(isome, 0xff4000, 0xffffff); 
     }
     /*
     else if (select.z == select.z1 && select.z == select.max_z)
@@ -322,6 +370,8 @@ void    ft_drw_map(t_vari select)
         select.y++;
     }
     mlx_put_image_to_window(select.mlx, select.win, select.img.img, 0, 0);
+    mlx_string_put( select.mlx, select.win, 1600, 50, 0xffffff, select.fn);
+    mlx_string_put( select.mlx, select.win, 1600, 80, 0xffffff, "Click on <space> for help");
 }
 
 void    ft_init_map(t_vari select)
@@ -335,7 +385,7 @@ void    ft_init_map(t_vari select)
     select.img.img = mlx_new_image(select.mlx, WIN_X, WIN_Y);
     select.img.addr = mlx_get_data_addr(select.img.img, &select.img.bits_per_pixel, &select.img.line_length, &select.img.endian);
     ft_drw_map(select);
-    mlx_string_put( select.mlx, select.win, 1600, 50, 0xffffff, select.fn);
+    
     mlx_loop(select.mlx);
 }
 
@@ -350,6 +400,7 @@ int main(int argc, char **argv)
         select = ft_read_line(argv[1]);
         select.fn = argv[1];
         select.multi_z = 1;
+        select.help = 0;
         ft_init_map(select);
     }
     return (0);
