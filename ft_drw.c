@@ -6,12 +6,27 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:21:32 by vifernan          #+#    #+#             */
-/*   Updated: 2021/09/26 16:08:29 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/09/27 15:11:04 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_lib.h"
 
+
+void ft_free_map(t_vari *select)
+{
+    int y;
+    
+    y = 0;
+    while (y <= select->y_size)
+    {
+        free(select->map[y]);
+        free(select->color_z[y]);
+        y++;
+    }
+    free(select->map);
+    free(select->color_z);
+}
 
 void    ft_isometric(float *x, float *y, int z, t_vari *select)
 {
@@ -34,6 +49,7 @@ void ft_ajust(t_vari *select)
 int	hooked_function(t_vari *select)
 {
     select->help = 0;
+    system("leaks fdf");
     exit(0);
 }
 
@@ -81,22 +97,29 @@ void ft_help_win(t_vari *select)
     }
     mlx_put_image_to_window(select->mlx, select->win, select->img.img, 0, 0);
     mlx_string_put(select->mlx, select->win, 500, 300, 0xffffff, "HELP\\.");
-    mlx_string_put(select->mlx, select->win, 780, 470, 0xffffff, "Click on <esc> to exit");
-    mlx_string_put(select->mlx, select->win, 780, 450, 0xffffff, "Click on <a> to move left");
-    mlx_string_put(select->mlx, select->win, 780, 490, 0xffffff, "Click on <d> to move right");
-    mlx_string_put(select->mlx, select->win, 780, 510, 0xffffff, "Click on <s> to move down");
-    mlx_string_put(select->mlx, select->win, 780, 530, 0xffffff, "Click on <w> to move up");
-    mlx_string_put(select->mlx, select->win, 780, 550, 0xffffff, "Click on <z> to increase z value");
-    mlx_string_put(select->mlx, select->win, 780, 570, 0xffffff, "Click on <x> to decrease z value");
-    mlx_string_put(select->mlx, select->win, 780, 590, 0xffffff, "Click on <up> to change perspective");
-    mlx_string_put(select->mlx, select->win, 780, 610, 0xffffff, "Click on <down> to change perspective");
+    mlx_string_put(select->mlx, select->win, 780, 390, 0xffffff, "Click on <esc> to exit");
+    mlx_string_put(select->mlx, select->win, 780, 420, 0xffffff, "Click on <+> to zoom in");
+    mlx_string_put(select->mlx, select->win, 780, 450, 0xffffff, "Click on <-> to zoom out");
+    mlx_string_put(select->mlx, select->win, 780, 480, 0xffffff, "Click on <a> to move left");
+    mlx_string_put(select->mlx, select->win, 780, 510, 0xffffff, "Click on <d> to move right");
+    mlx_string_put(select->mlx, select->win, 780, 540, 0xffffff, "Click on <s> to move down");
+    mlx_string_put(select->mlx, select->win, 780, 570, 0xffffff, "Click on <w> to move up");
+    mlx_string_put(select->mlx, select->win, 780, 600, 0xffffff, "Click on <z> to increase z value");
+    mlx_string_put(select->mlx, select->win, 780, 630, 0xffffff, "Click on <x> to decrease z value");
+    mlx_string_put(select->mlx, select->win, 780, 660, 0xffffff, "Click on <up> to change perspective");
+    mlx_string_put(select->mlx, select->win, 780, 690, 0xffffff, "Click on <down> to change perspective");
+    mlx_string_put( select->mlx, select->win, 1200, 900, 0xffffff, "Click on <space> to exit help");
+    
 }
 
 int	key_hook(int keycode, t_vari *select)
 {
     if (keycode == 53)
+    {
+        system("leaks fdf");
         exit(0);
-    if (keycode == 125)
+    }
+    if (keycode == 125 && select->help == 0)
     {
         if (select->iso > 0)
         {
@@ -126,7 +149,7 @@ int	key_hook(int keycode, t_vari *select)
         }
     }
 
-    if (keycode == 6)
+    if (keycode == 6 && select->help == 0)
     {
             select->multi_z += 1;
             mlx_clear_window(select->mlx, select->win);
@@ -145,9 +168,9 @@ int	key_hook(int keycode, t_vari *select)
     }
 
 
-    if (keycode == 126)
+    if (keycode == 126 && select->help == 0)
     {
-        if (select->iso < 1)
+        if (select->iso < 1.2)
         {
             select->iso += 0.1;
             mlx_clear_window(select->mlx, select->win);
@@ -156,7 +179,7 @@ int	key_hook(int keycode, t_vari *select)
             ft_drw_map(*select);
         }
     }
-    if (keycode == 69)
+    if (keycode == 69 && select->help == 0)
     {
         select->space += 1;
         mlx_clear_window(select->mlx, select->win);
@@ -164,7 +187,7 @@ int	key_hook(int keycode, t_vari *select)
         ft_ajust(select);
         ft_drw_map(*select);
     }
-    if (keycode == 78)
+    if (keycode == 78 && select->help == 0)
     {
         if (select->space > 0)
         {
@@ -175,7 +198,7 @@ int	key_hook(int keycode, t_vari *select)
             ft_drw_map(*select);
         }
     }
-    if (keycode == 2)
+    if (keycode == 2 && select->help == 0)
     {
         if (select->space > 0)
         {
@@ -186,7 +209,7 @@ int	key_hook(int keycode, t_vari *select)
             ft_drw_map(*select);
         }
     }
-    if (keycode == 0)
+    if (keycode == 0 && select->help == 0)
     {
         if (select->space > 0)
         {
@@ -196,7 +219,7 @@ int	key_hook(int keycode, t_vari *select)
             ft_drw_map(*select);
         }
     }
-    if (keycode == 1)
+    if (keycode == 1 && select->help == 0)
     {
         if (select->space > 0)
         {
@@ -206,7 +229,7 @@ int	key_hook(int keycode, t_vari *select)
             ft_drw_map(*select);
         }
     }
-    if (keycode == 13)
+    if (keycode == 13 && select->help == 0)
     {
         if (select->space > 0)
         {
@@ -243,7 +266,6 @@ int ft_slcolor(t_iso isome, t_vari select, float x1, float y1)
 {
     if (select.z > select.z1)
     {
-        //printf("%f\n", select.color_z[select.y][select.x]);
         isome.c1 = select.x - x1;
         isome.c2 = select.y - y1;
         isome.dis = isome.c1*isome.c1 + isome.c2*isome.c2;
@@ -256,9 +278,6 @@ int ft_slcolor(t_iso isome, t_vari select, float x1, float y1)
         isome.dis = isome.c1*isome.c1 + isome.c2*isome.c2;
         select.color = ft_remap(isome, 0xff4000, 0xffffff); 
     }
-    /*
-    else if (select.z == select.z1 && select.z == select.max_z)
-        select.color = 0xff4000;*/
     else if (select.z > 0 || select.z1 > 0)
         select.color = 0xff4000;
     else
@@ -276,10 +295,8 @@ void ft_selval(t_vari *select, float *x1, float *y1)
     select->y *= select->space;
     *x1 *= select->space;
     *y1 *= select->space;
-
     ft_isometric(&select->x, &select->y, select->z, select);
     ft_isometric(x1, y1, select->z1, select);
-
     select->x += select->x_start;
     select->y += select->y_start;
     *x1 += select->x_start;
@@ -297,7 +314,6 @@ void    ft_bresenham(float x1, float y1, t_vari select)
     select.max = ft_max(ft_mod(select.x_step),ft_mod(select.y_step));
     select.x_step /= select.max;
     select.y_step /= select.max;
-
     if (select.z != select.z1)
     {
         isome.c1 = select.x - x1;
@@ -341,7 +357,6 @@ int ft_space_size(t_vari *select)
     select->max_z) - ft_isometric_mx(select->x_size, 0, select->max_z);
     x = select->x_size;
     y = select->y_size;
-
     ft_isometric(&x, &y, select->max_z, select);
     if (select->x_size == select->y_size)
         x = y;
@@ -387,6 +402,7 @@ void    ft_init_map(t_vari select)
     ft_drw_map(select);
     
     mlx_loop(select.mlx);
+    ft_free_map(&select);
 }
 
 int main(int argc, char **argv)

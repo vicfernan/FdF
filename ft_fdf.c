@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 16:51:03 by vifernan          #+#    #+#             */
-/*   Updated: 2021/09/26 16:14:02 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/09/27 14:51:35 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,14 @@ int ft_color_z(char *aux)
 
 void ft_map_int(char **a_map, t_vari *select)
 {
-	//int		**map;
     char	**aux;
     int     x;
     int     y;
 
     select->map = malloc(select->y_size * sizeof(int *));
     select->color_z = malloc(select->y_size * sizeof(int *));
-    y = 0;
     select->max_z = 0;
+    y = 0;
     while (y <= select->y_size)
     {
         select->map[y] = malloc(select->x_size * sizeof(int));
@@ -101,15 +100,18 @@ void ft_map_int(char **a_map, t_vari *select)
             if (ft_strchr(aux[x], ','))
                 select->color_z[y][x] = ft_color_z(aux[x]);
             else
-                select->color_z[y][x] = 000;
-            /*if ((aux[x][0] < '0' && aux[x][0] > 9))
+                select->color_z[y][x] = 0xffffff;
+            if (((aux[x][0] < '0' && aux[x][0] > 9) && aux[x][0] != '-') || 
+                    ((aux[x][1] < '0' && aux[x][1] > 9) && aux[x][0] == '-') ||
+                    (aux[x][1] == '\0' && aux[x][0] == '-'))
             {
-                printf("Wrong file!");
+                printf("Wrong file!\n");
                 exit(0);
-            }*/
+            }
             select->map[y][x] = ft_atoi(aux[x]);
             if (select->map[y][x] > select->max_z)
                 select->max_z = select->map[y][x];
+            free(aux[x]);
             x++;
         }
         free(aux);
@@ -157,8 +159,11 @@ char    **ft_read_save(char *argv, char **a_map)
     free(line);
     line = NULL;
     close(fd);
-    if (!a_map)
-        return (0);
+    if (a_map[0][0] == '\0')
+    {
+        printf("Wrong file!\n");
+        exit(0);
+    }
     return (a_map);
 }
 
@@ -191,12 +196,20 @@ t_vari    ft_read_line(char *argv)
 {
     char    **a_map;
     t_vari  select;
+    int y;
 
     select.y_size = ft_size_y(argv);
     a_map = ft_calloc(select.y_size + 2, sizeof(char *));
     a_map = ft_read_save(argv, a_map);
     select.x_size = ft_size_x(a_map);
     ft_map_int(a_map, &select);
+    y = 0;
+    while (y <= select.y_size)
+    {
+        free(a_map[y]);
+        y++;
+    }
+    free(a_map);
     return (select);
 }
 
