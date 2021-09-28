@@ -6,7 +6,7 @@
 #    By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/06 19:47:29 by vifernan          #+#    #+#              #
-#    Updated: 2021/09/27 12:14:48 by vifernan         ###   ########.fr        #
+#    Updated: 2021/09/28 15:01:32 by vifernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,15 @@ NAME	= fdf
 
 CFLAGS	= -Wall -Wextra -Werror
 LINK	= -lmlx -framework OpenGL -framework AppKit
-SRCS	= 	ft_drw.c \
-			ft_fdf.c \
+SRCS	= 	drw.c \
+			read.c \
+			color.c \
 			get_next_line.c \
+			ajust.c \
+			isometric.c \
+			hook.c \
+			help.c \
+			free.c \
 
 OBJS	= $(SRCS:.c=.o)
 CC		= 	gcc

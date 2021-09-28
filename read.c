@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fdf.c                                           :+:      :+:    :+:   */
+/*   read.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 16:51:03 by vifernan          #+#    #+#             */
-/*   Updated: 2021/09/27 14:51:35 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/09/28 15:48:14 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int ft_set_color(char *str)
     if ((str[2] >= 0 && str[2] <= 9) || (ft_tolower(str[2]) >= 'a' && ft_tolower(str[2]) <= 'f'))
         r = ft_convert_hexa(str[2], str[3]);
     if ((str[4] >= 0 && str[4] <= 9) || (ft_tolower(str[4]) >= 'a' && ft_tolower(str[4]) <= 'f'))
-        g = ft_convert_hexa(str[2], str[3]);
+        g = ft_convert_hexa(str[4], str[5]);
     if ((str[6] >= 0 && str[6] <= 9) || (ft_tolower(str[6]) >= 'a' && ft_tolower(str[6]) <= 'f'))
-        b = ft_convert_hexa(str[2], str[3]);
+        b = ft_convert_hexa(str[6], str[7]);
     return (0 << 24 | r << 16 | g << 8 | b);
 }
 
