@@ -6,13 +6,13 @@
 #    By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/06 19:47:29 by vifernan          #+#    #+#              #
-#    Updated: 2021/09/28 15:01:32 by vifernan         ###   ########.fr        #
+#    Updated: 2021/10/01 19:02:57 by vifernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= fdf
 
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g3 -fsanitize=address
 LINK	= -lmlx -framework OpenGL -framework AppKit
 SRCS	= 	drw.c \
 			read.c \

@@ -6,11 +6,19 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 16:51:03 by vifernan          #+#    #+#             */
-/*   Updated: 2021/09/28 15:48:14 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/10/01 19:02:55 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_lib.h"
+
+//void	leaks(void);
+
+/*void	leaks(void)
+{
+	system("leaks fdf");
+}
+*/
 
 int ft_convert_hexa(char a, char b)
 {
@@ -23,15 +31,20 @@ int ft_convert_hexa(char a, char b)
     a = ft_tolower(a);
     b = ft_tolower(b);
     hexa = "0123456789abcdef";
-    x = 0;
-    i = 0;
-    r = 0;
-    while(hexa[r++] != '\0')
+    x = -1;
+    i = -1;
+    r = -1;
+    while(hexa[++r] != '\0')
     {
         if (hexa[r] == a)
             i = r;
         if (hexa[r] == b)
             x = r;
+    }
+    if ((x < 0) || (i < 0))
+    {
+        printf("Wrong ?file!\n");
+        exit(0);
     }
     result = (i * 16) + (x * 1);
     return (result); 
@@ -43,16 +56,28 @@ int ft_set_color(char *str)
     int g;
     int b;
 
-    r = 0;
-    g = 0;
-    b = 0;
-    if ((str[2] >= 0 && str[2] <= 9) || (ft_tolower(str[2]) >= 'a' && ft_tolower(str[2]) <= 'f'))
-        r = ft_convert_hexa(str[2], str[3]);
-    if ((str[4] >= 0 && str[4] <= 9) || (ft_tolower(str[4]) >= 'a' && ft_tolower(str[4]) <= 'f'))
+    if (str[0] != '0' || str[1] != 'x')
+    {
+        printf("Wrong *file!\n");
+        exit(0);
+    }
+    r = ft_convert_hexa(str[2], str[3]);
+    if (ft_strlen(str) == 4)
+    {
+        g = ft_convert_hexa('0', '0');
+        b = ft_convert_hexa('0', '0');
+    }
+    else if (ft_strlen(str) == 6)
+    {
         g = ft_convert_hexa(str[4], str[5]);
-    if ((str[6] >= 0 && str[6] <= 9) || (ft_tolower(str[6]) >= 'a' && ft_tolower(str[6]) <= 'f'))
+        b = ft_convert_hexa('0', '0');
+    }
+    else
+    {
+        g = ft_convert_hexa(str[4], str[5]);
         b = ft_convert_hexa(str[6], str[7]);
-    return (0 << 24 | r << 16 | g << 8 | b);
+    }
+    return (r << 16 | g << 8 | b);
 }
 
 int ft_color_z(char *aux)
@@ -84,10 +109,11 @@ void ft_map_int(char **a_map, t_vari *select)
     select->color_z = malloc(select->y_size * sizeof(int *));
     select->max_z = 0;
     y = 0;
-    while (y <= select->y_size)
+    //printf("%d\n", select->y_size);
+    while (y < select->y_size)
     {
         select->map[y] = malloc(select->x_size * sizeof(int));
-        select->color_z[y] = malloc(select->x_size * sizeof(int));
+        select->color_z[y] = malloc(select->x_size * sizeof(float));
         y++;
     }
     y = 0;
@@ -98,7 +124,10 @@ void ft_map_int(char **a_map, t_vari *select)
         while (x < select->x_size)
         {
             if (ft_strchr(aux[x], ','))
+            {
+                select->onoff_c = 1;
                 select->color_z[y][x] = ft_color_z(aux[x]);
+            }
             else
                 select->color_z[y][x] = 0xffffff;
             if (((aux[x][0] < '0' && aux[x][0] > 9) && aux[x][0] != '-') || 
@@ -117,7 +146,7 @@ void ft_map_int(char **a_map, t_vari *select)
         free(aux);
         y++;
     }
-    //return (map);
+    //system("leaks fdf");
 }
 
 int     ft_size_x(char **a_map)
@@ -144,24 +173,28 @@ char    **ft_read_save(char *argv, char **a_map)
     int     stat;
 
     fd = open(argv, O_RDONLY);
+    line = NULL;
     stat = get_next_line(fd, &line);
     i = 0;
     while (stat >= 0)
     {
         a_map[i] = ft_strdup(line);
+        //printf("[%d]%s ** |\n\n\n\n\n\n\n\n\n\n", i, a_map[i]);
         free(line);
         line = NULL;
         if (stat <= 0)
             break ;
         stat = get_next_line(fd, &line);
+        if (line[0] == '\0' || line[0] == '\n')
+            break ;
         i++;
     }
     free(line);
     line = NULL;
     close(fd);
-    if (a_map[0][0] == '\0')
+    if (a_map[0][0] == '\0' || a_map[0][0] == '\n')
     {
-        printf("Wrong file!\n");
+        printf("Wrong **file!\n");
         exit(0);
     }
     return (a_map);
@@ -175,8 +208,9 @@ int ft_size_y(char *argv)
     int     stat;
 
     fd = open(argv, O_RDONLY);
+    line = NULL;
     stat = get_next_line(fd, &line);
-    i = 0;
+    i = 1;
     while (stat >= 0)
     {
         free(line);
@@ -184,6 +218,8 @@ int ft_size_y(char *argv)
         if (stat <= 0)
             break ;
         stat = get_next_line(fd, &line);
+        if (line[0] == '\0' || line[0] == '\n')
+            i--;
         i++;
     }
     free(line);
@@ -199,7 +235,8 @@ t_vari    ft_read_line(char *argv)
     int y;
 
     select.y_size = ft_size_y(argv);
-    a_map = ft_calloc(select.y_size + 2, sizeof(char *));
+    select.onoff_c = 0;
+    a_map = ft_calloc(select.y_size + 1, sizeof(char *));
     a_map = ft_read_save(argv, a_map);
     select.x_size = ft_size_x(a_map);
     ft_map_int(a_map, &select);

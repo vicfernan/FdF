@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 19:51:11 by vifernan          #+#    #+#             */
-/*   Updated: 2021/09/28 15:53:28 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/10/01 19:04:34 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 # include <unistd.h>
 # include "./libft/libft.h"
 #define BUFFER_SIZE 20
-#define WIN_X 1920
-#define WIN_Y 1080
+#define WIN_X 2560
+#define WIN_Y 1440
+//2560 × 1440
 
 typedef struct	s_data {
 	void	*img;
@@ -36,10 +37,18 @@ typedef struct s_case{
     int case1;
     int case2;
 }               t_case;
+/*
+typedef struct s_color{
+}               t_color;
+*/
 
 typedef struct t_variables{
     t_case key;
     t_data img;
+    //t_color clr;
+    float from;
+    float to;
+    int onoff_c;
     char *mlx;
     char *win;
 	int **map;
@@ -47,7 +56,7 @@ typedef struct t_variables{
     int scale_x;
     int scale_y;
     int x_size;
-    int color;
+    float color;
     int max_z;
     int y_size;
     int space;
