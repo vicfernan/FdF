@@ -6,7 +6,7 @@
 #    By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/06 19:47:29 by vifernan          #+#    #+#              #
-#    Updated: 2021/10/02 17:28:23 by vifernan         ###   ########.fr        #
+#    Updated: 2021/10/02 18:30:49 by vifernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS	= 	drw.c \
 			get_color.c \
 			sizes.c \
 			fill_maps.c \
+			mini_printf.c \
 
 OBJS	= $(SRCS:.c=.o)
 CC		= 	gcc

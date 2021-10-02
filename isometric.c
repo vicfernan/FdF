@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 12:08:49 by vifernan          #+#    #+#             */
-/*   Updated: 2021/10/02 18:09:36 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/10/02 19:10:34 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_bresenham(float x1, float y1, t_vari select)
 		if (select.onoff_c == 0)
 			select.color = ft_slcolor(isome, select, x1, y1);
 		else
-			select.color = ft_remap(isome, select.from, select.to);
+			select.color = ft_slcolor2(select, x1, y1);
 		if ((select.x > 0 && select.x < WIN_X)
 			&& (select.y > 0 && select.y < WIN_Y))
 			my_mlx_pixel_put(&select.img, select.x, select.y, select.color);

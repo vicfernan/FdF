@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:21:32 by vifernan          #+#    #+#             */
-/*   Updated: 2021/10/02 17:34:43 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/10/02 19:33:12 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	main(int argc, char **argv)
 	t_vari	select;
 
 	if (argc != 2)
-		printf("Wrong arg!");
+		ft_mini_printf("Wrong arg!\n");
 	if (argc == 2)
 	{
 		select = ft_read_line(argv[1]);

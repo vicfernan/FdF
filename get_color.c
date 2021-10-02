@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 17:17:01 by vifernan          #+#    #+#             */
-/*   Updated: 2021/10/02 17:57:13 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/10/02 18:40:39 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	ft_set_color(char *str)
 	int	g;
 	int	b;
 
-	if (str[0] != '0' || str[1] != 'x')
+	if ((str[0] != '0' || str[1] != 'x') ||
+        ((str[0] == '0' && str[1] == 'x') && (str[2] == '\0')))
 		ft_wrog_file();
 	r = ft_convert_hexa(str[2], str[3]);
 	if (ft_strlen(str) == 4)

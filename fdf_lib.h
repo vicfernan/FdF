@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 19:51:11 by vifernan          #+#    #+#             */
-/*   Updated: 2021/10/02 18:16:56 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/10/02 19:03:35 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <stdarg.h>
 # include <mlx.h>
 # include <math.h>
 # include <fcntl.h>
@@ -78,6 +79,9 @@ typedef struct t_isometric{
 	float	dis;
 }				t_iso;
 
+int     ft_slcolor2(t_vari select, float x1, float y1);
+float	ft_remap2(t_vari select, float newFrom, float newTo, float step);
+int     ft_mini_printf(const char *str, ...);
 t_vari	ft_read_line(char *argv);
 int		ft_check_line_size(char **a_map, int y);
 void	ft_start_maps(t_vari *select);

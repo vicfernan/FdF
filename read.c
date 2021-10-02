@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 16:51:03 by vifernan          #+#    #+#             */
-/*   Updated: 2021/10/02 17:51:20 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/10/02 18:31:31 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_wrog_file(void)
 {
-	printf("Wrong file!\n");
+	ft_mini_printf("Wrong file!\n");
 	exit(0);
 }
 
