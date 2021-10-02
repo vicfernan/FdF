@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 12:08:49 by vifernan          #+#    #+#             */
-/*   Updated: 2021/10/01 18:30:32 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/10/02 18:09:36 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	ft_selval(t_vari *select, float *x1, float *y1)
 	select->z1 = select->map[(int)*y1][(int)*x1];
 	select->from = select->color_z[(int)select->y][(int)select->x];
 	select->to = select->color_z[(int)*y1][(int)*x1];
-	//printf("%f | %f\n", select->from, select->to);
 	select->z *= select->multi_z;
 	select->z1 *= select->multi_z;
 	select->x *= select->space;
@@ -51,6 +50,9 @@ void	ft_selval(t_vari *select, float *x1, float *y1)
 	select->y += select->y_start;
 	*x1 += select->x_start;
 	*y1 += select->y_start;
+	select->x_step = *x1 - select->x;
+	select->y_step = *y1 - select->y;
+	select->max = ft_max(ft_mod(select->x_step), ft_mod(select->y_step));
 }
 
 void	ft_bresenham(float x1, float y1, t_vari select)
@@ -58,9 +60,6 @@ void	ft_bresenham(float x1, float y1, t_vari select)
 	t_iso	isome;
 
 	ft_selval(&select, &x1, &y1);
-	select.x_step = x1 - select.x;
-	select.y_step = y1 - select.y;
-	select.max = ft_max(ft_mod(select.x_step), ft_mod(select.y_step));
 	select.x_step /= select.max;
 	select.y_step /= select.max;
 	if (select.z != select.z1)
@@ -69,7 +68,6 @@ void	ft_bresenham(float x1, float y1, t_vari select)
 		isome.c2 = select.y - y1;
 		isome.hipo = isome.c1 * isome.c1 + isome.c2 * isome.c2;
 	}
-	//printf("%d\n", select.onoff_c);
 	while ((int)(select.x - x1) || (int)(select.y - y1))
 	{
 		if (select.onoff_c == 0)

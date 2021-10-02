@@ -6,18 +6,13 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:21:32 by vifernan          #+#    #+#             */
-/*   Updated: 2021/10/01 18:38:19 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/10/02 17:34:43 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_lib.h"
 
 int	ft_slcolor(t_iso isome, t_vari select, float x1, float y1);
-
-/*void	leaks(void)
-{
-	system("leaks fdf");
-}*/
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -71,7 +66,6 @@ int	main(int argc, char **argv)
 {
 	t_vari	select;
 
-	//atexit(leaks);
 	if (argc != 2)
 		printf("Wrong arg!");
 	if (argc == 2)

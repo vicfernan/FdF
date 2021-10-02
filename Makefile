@@ -6,7 +6,7 @@
 #    By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/06 19:47:29 by vifernan          #+#    #+#              #
-#    Updated: 2021/10/01 19:02:57 by vifernan         ###   ########.fr        #
+#    Updated: 2021/10/02 17:28:23 by vifernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,9 @@ SRCS	= 	drw.c \
 			hook.c \
 			help.c \
 			free.c \
+			get_color.c \
+			sizes.c \
+			fill_maps.c \
 
 OBJS	= $(SRCS:.c=.o)
 CC		= 	gcc
@@ -30,7 +33,7 @@ INCLUDES = -I./includes
 
 all: $(NAME)
 
-BCyan = \033[1;36m 
+BCyan = \033[1;36m
 GREEN = \033[0;32m
 Yellow = \033[0;33m
 Red = \033[0;31m
