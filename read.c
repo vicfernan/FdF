@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 16:51:03 by vifernan          #+#    #+#             */
-/*   Updated: 2021/10/02 18:31:31 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/10/03 16:10:25 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ char	**ft_read_save(char *argv, char **a_map)
 	int		stat;
 
 	fd = open(argv, O_RDONLY);
-	line = NULL;
+	if (fd != 3)
+		ft_wrog_file();
 	stat = get_next_line(fd, &line);
 	i = 0;
 	while (stat >= 0)
 	{
 		a_map[i++] = ft_strdup(line);
-		free(line);
-		line = NULL;
+		line = ft_free_line(line);
 		if (stat <= 0)
 			break ;
 		stat = get_next_line(fd, &line);

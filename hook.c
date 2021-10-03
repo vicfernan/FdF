@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 12:15:35 by vifernan          #+#    #+#             */
-/*   Updated: 2021/09/28 16:02:33 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/10/03 16:26:58 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_select_case(int keycode, t_vari *select)
 		else
 		{
 			select->help = 0;
-			ft_ajust(select);
 			ft_drw_map(*select);
 		}
 	}
@@ -106,6 +105,13 @@ int	key_hook(int keycode, t_vari *select)
 	{
 		select->key.case1++;
 		select->iso -= 0.1;
+	}
+	if (keycode == 8 && select->help == 0 && ++select->key.case2)
+	{
+		if (select->onoff_c == 1)
+			select->onoff_c = 0;
+		else
+			select->onoff_c = 1;
 	}
 	ft_case_1(keycode, select);
 	ft_case_2(keycode, select);

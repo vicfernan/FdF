@@ -6,13 +6,13 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 18:27:57 by vifernan          #+#    #+#             */
-/*   Updated: 2021/10/02 18:32:30 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/10/03 15:57:02 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_lib.h"
 
-int ft_str_put(char *aux)
+int	ft_str_put(char *aux)
 {
 	int	i;
 	int	x;
@@ -27,7 +27,7 @@ int ft_str_put(char *aux)
 	return (x);
 }
 
-int ft_number(unsigned int n)
+int	ft_number(unsigned int n)
 {
 	int	x;
 
@@ -46,7 +46,7 @@ int ft_number(unsigned int n)
 	return (x);
 }
 
-int ft_count(va_list arg, const char *str)
+int	ft_count(va_list arg, const char *str)
 {
 	int	x;
 	int	i;
@@ -58,12 +58,12 @@ int ft_count(va_list arg, const char *str)
 		if (str[i] == '%' && str[i + 1] == 's')
 		{
 			x += ft_str_put(va_arg(arg, char *));
-			i++;	
+			i++;
 		}
 		else if (str[i] == '%' && str[i + 1] == 's')
 		{
 			x += ft_number((unsigned int)va_arg(arg, int));
-			i++;	
+			i++;
 		}
 		else
 			x += write(1, &str[i], 1);
@@ -72,15 +72,14 @@ int ft_count(va_list arg, const char *str)
 	return (x);
 }
 
-int ft_mini_printf(const char *str, ...)
+int	ft_mini_printf(const char *str, ...)
 {
 	int		count;
 	va_list	arg;
-	
+
 	count = 0;
 	va_start(arg, str);
 	count += ft_count(arg, str);
 	va_end(arg);
-
 	return (count);
 }
