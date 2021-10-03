@@ -11,4 +11,4 @@ image
 * [Check_errors](#Check-errors)
 
 ### Read map
-![img_read](https://drive.google.com/file/d/1mPqxNLsPpx1h-3RvgSqeFUsAm6voeZyM/view?usp=sharing)
+![img_read](https://drive.google.com/file/d/1wXeCnF7t-CvuxlUkVduK0HhkRKFm7X5g/view?usp=sharing)
