@@ -11,4 +11,4 @@ image
 * [Check_errors](#Check-errors)
 
 ### Read map
-![gif_01](https://drive.google.com/uc?export=view&id=1lHOYdkrSTlfExwcKfGCXHiamJJIL0q9h)
+![img_read](https://drive.google.com/file/d/1mPqxNLsPpx1h-3RvgSqeFUsAm6voeZyM/view?usp=sharing)
