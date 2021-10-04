@@ -28,4 +28,4 @@ float	ft_remap(t_iso isome, float newFrom, float newTo)
 {
 	return ((isome.dis - 0) / (isome.hipo - 0) * (newTo - newFrom) + (newFrom));
 }
-```
+````
