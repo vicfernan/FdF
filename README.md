@@ -13,5 +13,5 @@ The goal of this project is to create a 3d map with the coordinates read from a 
 
 ### Read map
 
-The map is given in a text format (example below). As you can see its a rectangle or a square. The number on it is the z value of the coordenates saved on the following variable ````c select->map[y][x]```` inside the select struct.
+The map is given in a text format (example below). As you can see its a rectangle or a square. The number on it is the z value of the coordenates saved on the following variable ````select->map[y][x]```` inside the select struct.
 ![img_read](https://espaciodron.es/read_m.png)
