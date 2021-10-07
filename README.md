@@ -23,6 +23,7 @@ Its also allow to give color values for the pixels points in the map. In this ca
   - The map doesn´t have colors but it has different levels of z.
   - The map has colors.
 In the first case I print the line where z_from and z_to are diferent whit a degradate color from white the lower value to red the highest. Using the following funtion:
+
 ````c
 float	ft_remap(t_iso isome, float newFrom, float newTo)
 {
@@ -30,4 +31,32 @@ float	ft_remap(t_iso isome, float newFrom, float newTo)
 }
 ````
 With the second case I save the value given (0,0xffffff) in the following variable ````select->color_z[y][x]````.
+
 ![img_read](https://espaciodron.es/comparation.png)
+
+### Draw map
+
+For draw the map I use the ![Bresenham algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#:~:text=Bresenham's%20line%20algorithm%20is%20a,straight%20line%20between%20two%20points.&text=It%20is%20one%20of%20the,the%20field%20of%20computer%20graphics.) that it makes a grid to which yo've to change its perspective with the following function:
+
+````c
+void	ft_isometric(float *x, float *y, int z, t_vari *select)
+{
+	*x = (*x - *y) * cos(select->iso);
+	*y = (*x + *y) * sin(select->iso) - z;
+}
+````
+
+*````select->iso```` is the value to change it perspective with the hooks.
+
+### How to use
+
+| Character | Object |
+| - | - |
+| 1 | Wall. |
+| 0 | Empty space. |
+| C | Collectable. |
+| E | Exit. |
+| P | Player starting position. |
+| H | Horizontal enemy. It moves to left and right, changing direction when its path is blocked. |
+| V | Vertical enemy. Moving up and down. |
+| F | Following enemy. Each move tries to get closer to the player |
