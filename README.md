@@ -16,7 +16,7 @@ The map is given in a text format (example below). As you can see its a rectangl
 
 ![img_read](https://espaciodron.es/read_m.png)
 
-### Read map
+### Colors
 
 Its also allow to give color values for the pixels points in the map. In this case I conteplate to options:
   - The map doesn´t have colors but it has different levels of z (example above).
