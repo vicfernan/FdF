@@ -19,8 +19,9 @@ The map is given in a text format (example below). As you can see its a rectangl
 ### Read map
 
 Its also allow to give color values for the pixels points in the map. In this case I conteplate to options:
-  - The map doesn´t have colors but it has different levels of z.
+  - The map doesn´t have colors but it has different levels of z (example above).
   - The map has colors.
+  ![img_read](https://espaciodron.es/colors.png)
 In the first case I print the line where z_from and z_to are diferent whit a degradate color from white the lower value to red the highest. Using the following funtion:
 
 ````c
