@@ -35,7 +35,7 @@ With the second case I save the value given (0,0xffffff) in the following variab
 
 ### Draw map
 
-For draw the map I use the ![Bresenham algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#:~:text=Bresenham's%20line%20algorithm%20is%20a,straight%20line%20between%20two%20points.&text=It%20is%20one%20of%20the,the%20field%20of%20computer%20graphics.) that it makes a grid to which yo've to change its perspective with the following function:
+For draw the map I use the [Bresenham algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#:~:text=Bresenham's%20line%20algorithm%20is%20a,straight%20line%20between%20two%20points.&text=It%20is%20one%20of%20the,the%20field%20of%20computer%20graphics.) that it makes a grid to which yo've to change its perspective with the following function:
 
 ````c
 void	ft_isometric(float *x, float *y, int z, t_vari *select)
