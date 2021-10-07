@@ -52,11 +52,13 @@ void	ft_isometric(float *x, float *y, int z, t_vari *select)
 
 | Character | Object |
 | - | - |
-| 1 | Wall. |
-| 0 | Empty space. |
-| C | Collectable. |
-| E | Exit. |
-| P | Player starting position. |
-| H | Horizontal enemy. It moves to left and right, changing direction when its path is blocked. |
-| V | Vertical enemy. Moving up and down. |
-| F | Following enemy. Each move tries to get closer to the player |
+| esc | exit |
+| + | Zoom in |
+| - | Zoom out |
+| a | Move left |
+| d | Move right |
+| s | Move down |
+| w | Move up |
+| up | Change perspective > iso|
+| down | Change perspective < iso |
+| c | original map colors on/off |
