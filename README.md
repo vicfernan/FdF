@@ -30,3 +30,4 @@ float	ft_remap(t_iso isome, float newFrom, float newTo)
 }
 ````
 With the second case I save the value given (0,0xffffff) in the following variable ````select->color_z[y][x]````.
+![img_read](https://espaciodron.es/comparation.png)
