@@ -9,7 +9,6 @@ The goal of this project is to create a 3d map with the coordinates read from a 
 * [Colors](#Colors)
 * [Draw_map](#Draw-map)
 * [How to use](#How-to-use)
-* [Check_errors](#Check-errors)
 
 ### Read map
 
