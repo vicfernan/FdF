@@ -50,6 +50,16 @@ void	ft_isometric(float *x, float *y, int z, t_vari *select)
 
 ### How to use
 
+| Rule | Function |
+| - | - |
+| ``make`` | Generates _fdf_ and an object file for each .c. |
+| ``make clean`` | Deletes all object files. |
+| ``make fclean`` | Deletes the object files and the _fdf_. |
+| ``make re`` | makes ``fclean`` and ``make`` again. |
+| `` make test`` | Allows you to select a map to execute de _fdf_ |
+
+![france](https://espaciodron.es/make.png)
+
 | Character | Object |
 | - | - |
 | esc | exit |
