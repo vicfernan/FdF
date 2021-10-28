@@ -6,7 +6,7 @@
 #    By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/06 19:47:29 by vifernan          #+#    #+#              #
-#    Updated: 2021/10/02 18:30:49 by vifernan         ###   ########.fr        #
+#    Updated: 2021/10/28 17:44:49 by vifernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,10 @@ fclean: clean
 re: fclean all
 
 test: all
-	@echo "$(BCyan)[RESULTS]$(NO_COLOR)"
+	@echo "$(GREEN)------------------------------------------[MAPS]------------------------------------------$(NO_COLOR)"
+	@ls ./test_maps_3 | cut -d "." -f 1 | column -c 100
+	@echo "$(GREEN)------------------------------------------------------------------------------------------$(NO_COLOR)"
+	@echo "$(Red)[Reading map..]$(NO_COLOR)"
 	@read -p "Select map name: " map; \
 	./fdf ./test_maps_3/$${map}.fdf
 
