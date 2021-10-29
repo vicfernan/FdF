@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 19:51:11 by vifernan          #+#    #+#             */
-/*   Updated: 2021/10/03 15:58:08 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/10/29 16:49:48 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <unistd.h>
 # include "./libft/libft.h"
 # define BUFFER_SIZE 20
-# define WIN_X 1920
-# define WIN_Y 1080
+# define WIN_X 2560
+# define WIN_Y 1440
 
 typedef struct s_data {
 	void	*img;

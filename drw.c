@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:21:32 by vifernan          #+#    #+#             */
-/*   Updated: 2021/10/02 19:33:12 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/10/29 16:51:10 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	ft_drw_map(t_vari select)
 		select.y++;
 	}
 	mlx_put_image_to_window(select.mlx, select.win, select.img.img, 0, 0);
-	mlx_string_put(select.mlx, select.win, 1600, 50,
+	mlx_string_put(select.mlx, select.win, 2000, 50,
 		0xffffff, select.fn);
-	mlx_string_put(select.mlx, select.win, 1600, 80,
+	mlx_string_put(select.mlx, select.win, 2000, 80,
 		0xffffff, "Click on <space> for help");
 }
 

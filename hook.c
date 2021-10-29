@@ -6,7 +6,7 @@
 /*   By: vifernan <vifernan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 12:15:35 by vifernan          #+#    #+#             */
-/*   Updated: 2021/10/03 16:26:58 by vifernan         ###   ########.fr       */
+/*   Updated: 2021/10/29 16:52:18 by vifernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	key_hook(int keycode, t_vari *select)
 		mlx_clear_window(select->mlx, select->win);
 		ft_clear_win(select);
 		ft_select_case(keycode, select);
-		mlx_string_put(select->mlx, select->win, 1600,
+		mlx_string_put(select->mlx, select->win, 2000,
 			50, 0xffffff, select->fn);
 	}
 	return (keycode);
