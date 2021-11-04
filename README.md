@@ -1,6 +1,6 @@
 # FdF | vifernan42
 
-This project creates a 3d map with the coordinates read from a text file using minilibx.
+This project creates a 3d map with the coordinates read from a text file. (must use minilibx)
 
 ![Grabación-de-pantalla-2021-10-29-a-las-5 57 01-p -m -_online-video-cutter com_](https://user-images.githubusercontent.com/82234144/139469077-1bdbdd8a-0b6a-463c-9bc5-2bbb14820d69.gif)
 
